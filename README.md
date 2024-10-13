@@ -20,6 +20,8 @@ Repository for Ansible playbooks and roles used for automating application deplo
   schema_setup.yml
   mysql_schema_setup.yml
 
+Give rabbitmq User password in [payment.service](service-files%2Fpayment.service) file
+
 
 
 * Command to run the ansible playbook
