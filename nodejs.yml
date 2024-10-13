@@ -19,7 +19,7 @@
 
 - name: Import task from schema_setup.yml
   ansible.builtin.import_tasks: schema_setup.yml
-  when: schema is defined
+  when: schema_type is defined
 
 - name: Import task from systemd_setup.yml
   ansible.builtin.import_tasks: systemd_setup.yml
