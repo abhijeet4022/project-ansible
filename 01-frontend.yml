@@ -2,7 +2,7 @@
   hosts: all
   become: yes
   vars:
-    - frontend
+    - component: frontend
   tasks:
     - name: Installing Nginx.
       ansible.builtin.yum:
