@@ -1,0 +1,21 @@
+- name: Installing Maven.
+  ansible.builtin.dnf:
+    name: maven
+    state: present
+
+- name: Import task from app-prerequisites.yml
+  ansible.builtin.import_tasks: app-prerequisites.yml
+
+- name: Building the application using Maven.
+  ansible.builtin.shell: mvn clean package ; mv /app/target/{{component}}-1.0.jar /app/{{component}}.jar
+  args:
+    chdir: /app
+
+- name: Import task from mysql_schema_setup.yml
+  ansible.builtin.import_tasks: mysql_schema_setup.yml
+  when: schema_type is defined
+
+- name: Import task from systemd_setup.yml
+  ansible.builtin.import_tasks: systemd_setup.yml
+
+
