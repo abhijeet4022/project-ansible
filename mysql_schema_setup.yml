@@ -4,4 +4,4 @@
     state: present
 
 - name: Loading the schema into MySQL.
-  ansible.builtin.shell: mysql -h mysql-dev.learntechnology.cloud -uroot -pRoboShop@1
+  ansible.builtin.shell: mysql -h mysql-dev.learntechnology.cloud -uroot -pRoboShop@1 < /app/schema/{{component}}.sql
