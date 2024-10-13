@@ -8,7 +8,7 @@
     path: /app
     state: absent
 
-- name: Removing the old {{component}} application directory.
+- name: Creating the old {{component}} application directory.
   ansible.builtin.file:
     path: /app
     state: directory
