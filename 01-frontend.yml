@@ -1,4 +1,4 @@
-- name: Nginx Web Server Setup
+- name: "{{component}}" Web Server Setup
   hosts: all
   become: yes
   vars:
