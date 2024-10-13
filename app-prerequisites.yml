@@ -13,7 +13,7 @@
     path: /app
     state: directory
 
-- name: Downloading the frontend web layer code.
+- name: Downloading the {{component}} web layer code.
   ansible.builtin.unarchive:
     src: https://roboshop-artifacts.s3.amazonaws.com/{{component}}.zip
     dest: /app
