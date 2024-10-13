@@ -1,6 +1,6 @@
-- name: "{{component}}" Web Server Setup
+- name: Nginx Web Server Setup
   hosts: all
-  become: yes
+  become: True
   vars:
     - component: frontend
   tasks:
