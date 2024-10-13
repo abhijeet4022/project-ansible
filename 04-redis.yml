@@ -4,6 +4,10 @@
   vars:
     - component: redis
   tasks:
+    - name: Set a hostname
+      ansible.builtin.hostname:
+        name: "{{component}}"
+
     - name: Installing Remi repository for Redis.
       ansible.builtin.dnf:
         name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
