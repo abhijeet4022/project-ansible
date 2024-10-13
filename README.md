@@ -14,7 +14,5 @@ Repository for Ansible playbooks and roles used for automating application deplo
 
 
 
-
-
 * Command to run the ansible playbook
 `ansible-playbook -i frontend-dev.learntechnology.cloud, -e ansible_user=centos -e ansible_password=DevOps321 frontend.yml`
