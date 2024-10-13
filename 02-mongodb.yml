@@ -1,9 +1,13 @@
-- name: "{{component}}" Database Setup
+- name: MongoDB Database Setup
   hosts: all
   become: true
   vars:
     - component: mongodb
   tasks:
+    - name: Set a hostname
+      ansible.builtin.hostname:
+        name: "{{component}}"
+
     - name: Configuring the MongoDB repository.
       ansible.builtin.copy:
         src: repository-files/mongodb-org-4.2.repo
