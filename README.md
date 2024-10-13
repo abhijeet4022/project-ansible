@@ -11,6 +11,14 @@ Repository for Ansible playbooks and roles used for automating application deplo
 * Launch 10 VMs in AWS, one for each component.
 * Create A records for each VM (component) with their private IPs.
 * Replace the existing A records in the config files with the newly created ones.
+  1-reverse-proxy.conf
+  cart.service
+  catalogue.service
+  payment.service
+  shipping.service
+  user.service
+  schema_setup.yml
+  mysql_schema_setup.yml
 
 
 
