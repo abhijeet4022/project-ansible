@@ -1,0 +1,5 @@
+- name: Application Setup
+  hosts: all
+  become: true
+  roles:
+    - "{{ component }}"

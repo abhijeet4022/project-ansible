@@ -1,0 +1,12 @@
+- name: Configuring the MongoDB repository.
+  ansible.builtin.copy:
+    src: mongodb-org-4.2.repo
+    dest: /etc/yum.repos.d/mongodb-org-4.2.repo
+
+- name: Installing MongoDB client to load the schema.
+  ansible.builtin.dnf:
+    name: mongodb-org-shell
+    state: present
+
+- name: Loading the schema for the {{component}} application to mongodb.
+  ansible.builtin.shell: mongo --host mongodb-dev.learntechnology.cloud </app/schema/{{component}}.js
