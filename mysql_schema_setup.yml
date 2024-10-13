@@ -1,0 +1,7 @@
+- name: Installing MySQL.
+  ansible.builtin.dnf:
+    name: mysql
+    state: present
+
+- name: Loading the schema into MySQL.
+  ansible.builtin.shell: mysql -h mysql-dev.learntechnology.cloud -uroot -pRoboShop@1
