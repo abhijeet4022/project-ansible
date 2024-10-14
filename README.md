@@ -4,25 +4,30 @@ Repository for Ansible playbooks and roles used for automating application deplo
 
 
 # Pre-Requisites
-1. Create SG to allow SSH from internet `allow-ssh` .
-2. Create one IAM role with admin privilege - `admin-role`.
-* Create one aws vm as workstation and attach the admin IAM role and SG.
-* Then install ansible on the workstation vm - `sudo yum install ansible -y`
-* Launch 10 VMs in AWS, one for each component.
-* Create A records for each VM (component) with their private IPs.
-* Replace the existing A records in the config files with the newly created ones.
-  1-reverse-proxy.conf
-  cart.service
-  catalogue.service
-  payment.service
-  shipping.service
-  user.service
-  schema_setup.yml
-  mysql_schema_setup.yml
+1. Create a security group named `allow-ssh` to allow SSH access from the internet.
+2. Create an IAM role with admin privileges named `admin-role`.
+3. Launch a new EC2 instance as your workstation and attach both the `admin-role` IAM role and the `allow-ssh` security group to the instance.
+4. Install Ansible on the workstation:
+   * `sudo yum install ansible -y`
+5. Launch 10 EC2 instances in AWS, each representing a component of the Roboshop project.
+6. Create A Records for each VM with their private IPs.
+7. Update Configuration Files
+   1. Replace existing A records in the following configuration files with the newly created ones:
+      - 1-reverse-proxy.conf
+      - cart.service
+      - catalogue.service
+      - payment.service
+      - shipping.service
+      - user.service
+      - schema_setup.yml
+      - mysql_schema_setup.yml
+* Important: Update the RabbitMQ user password in the payment.service file.
 
-Give rabbitmq User password in [payment.service](service-files%2Fpayment.service) file
-
-
-
-* Command to run the ansible playbook
-`ansible-playbook -i frontend-dev.learntechnology.cloud, -e ansible_user=centos -e ansible_password=DevOps321 frontend.yml`
+8. Use the following command to run the playbook for a specific component:
+   - `ansible-playbook -i <host>, -e component=<component_name> -e ansible_user=<username> -e ansible_password=<password> main.yml
+   `
+   * Parameters:
+     - <host>: The hostname or inventory file for the targeted VMs.
+     - <component_name>: The specific component you want to deploy (e.g., cart, payment, catalogue).
+     - <username>: The username to SSH into the VMs (e.g., centos).
+     - <password>: The SSH password for the VMs.
