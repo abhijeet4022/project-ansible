@@ -1,0 +1,36 @@
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: "{{component}}"
+
+- name: Installing Nginx.
+  ansible.builtin.yum:
+    name: nginx
+    state: present
+
+- name: Removing default Nginx content.
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: absent
+
+- name: Creating default Nginx content.
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: directory
+
+- name: Downloading the frontend web layer code.
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
+    dest: /usr/share/nginx/html
+    remote_src: yes
+
+- name: Configuring reverse proxy settings.
+  ansible.builtin.copy:
+    src: 1-reverse-proxy.conf
+    dest: /etc/nginx/default.d/reverse-proxy.conf
+
+- name: Restarting and enabling the Nginx service.
+  ansible.builtin.systemd_service:
+    name: nginx
+    state: restarted
+    enabled: true
+    daemon_reload: true
