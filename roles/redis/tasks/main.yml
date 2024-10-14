@@ -1,0 +1,35 @@
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: "{{component}}"
+
+- name: Installing Remi repository for Redis.
+  ansible.builtin.dnf:
+    name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+    state: present
+    disable_gpg_check: true
+
+- name: Enabling the Redis 6.2 module from Remi repository.
+  ansible.builtin.shell: dnf module enable redis:remi-6.2 -y
+
+- name: Installing Redis.
+  ansible.builtin.dnf:
+    name: redis
+    state: present
+
+- name: Configuring Redis to allow external access - /etc/redis.conf.
+  ansible.builtin.replace:
+    path: /etc/redis.conf
+    regexp: 127.0.0.1
+    replace: 0.0.0.0
+
+- name: Configuring Redis to allow external access - /etc/redis/redis.conf.
+  ansible.builtin.replace:
+    path: /etc/redis/redis.conf
+    regexp: 127.0.0.1
+    replace: 0.0.0.0
+
+- name: Enabling and restarting Redis service.
+  ansible.builtin.systemd_service:
+    name: redis
+    state: restarted
+    enabled: true

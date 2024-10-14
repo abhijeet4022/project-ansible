@@ -1,0 +1,8 @@
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: "{{component}}"
+
+- name: Import task from python.yml.
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: python

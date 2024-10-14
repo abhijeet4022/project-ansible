@@ -1,0 +1,30 @@
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: "{{component}}"
+
+- name: Adding Erlang repository.
+  ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
+
+- name: Adding RabbitMQ repository.
+  ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
+
+- name: Installing RabbitMQ server.
+  ansible.builtin.dnf:
+    name: rabbitmq-server
+    state: present
+
+- name: Enabling and restarting RabbitMQ service.
+  ansible.builtin.systemd_service:
+    name: rabbitmq-server
+    state: restarted
+    enabled: true
+
+- name: Adding roboshop user and setting permissions for 'roboshop' user in RabbitMQ.
+  community.rabbitmq.rabbitmq_user:
+    user: roboshop
+    password: roboshop123
+    vhost: /
+    configure_priv: .*
+    read_priv: .*
+    write_priv: .*
+    state: present

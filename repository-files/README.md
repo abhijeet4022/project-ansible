@@ -1,1 +1,0 @@
-# To keep all Yum Repositories files.
