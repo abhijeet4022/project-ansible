@@ -14,15 +14,15 @@ Repository for Ansible playbooks and roles used for automating application deplo
 7. Create A Records for each VM with their private IPs.
 8. Update Configuration Files
    1. Replace existing A records in the following configuration files with the newly created ones:
-      - 1-reverse-proxy.conf
-      - cart.service
-      - catalogue.service
-      - payment.service
-      - shipping.service
-      - user.service
-      - schema_setup.yml
-      - mysql_schema_setup.yml
-* Important: Update the RabbitMQ user password in the payment.service file.
+      - `1-reverse-proxy.conf`
+      - `cart.service`
+      - `catalogue.service`
+      - `payment.service`
+      - `shipping.service`
+      - `user.service`
+      - `schema_setup.yml`
+      - `mysql_schema_setup.yml`
+* Important: Update the RabbitMQ user password in the `payment.service` file.
 
 9. Use the following command to run the playbook for a specific component:
    - `ansible-playbook -i <host>, -e component=<component_name> -e ansible_user=<username> -e ansible_password=<password> main.yml
